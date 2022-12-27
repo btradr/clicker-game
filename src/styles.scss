@@ -1,0 +1,17 @@
+/* ======================
+1. Other
+=======================*/
+
+// 1. Other
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+
+  background: linear-gradient(to right, #1d2b64, #f8cdda);
+}
