@@ -16,6 +16,7 @@ export class ModalComponent implements OnInit {
 
   public playerScore: number;
   public computerScore: number;
+  public timer: number = 0;
 
   public constructor(
     private storageService: StorageService

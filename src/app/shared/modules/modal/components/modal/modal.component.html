@@ -17,6 +17,14 @@
 			<p class="modal-wrap__text">
 				Computer score in last game: <b>{{ computerScore || 0 }}</b>
 			</p>
+			<div class="modal-wrap__timer">
+				<h3>Time:</h3>
+				<input
+					type="number"
+					placeholder="Enter milliseconds..."
+					[(ngModel)]="timer"
+				>
+			</div>
 		</div>
 		<div class="modal-wrap__actions">
 			<button

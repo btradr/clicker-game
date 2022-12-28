@@ -55,6 +55,23 @@
     }
   }
 
+  &__timer {
+    margin-top: 40px;
+
+    input {
+      width: 100%;
+      display: block;
+
+      padding: 15px 30px;
+      margin: 0;
+
+      font-weight: 700;
+
+      border: 1px solid #000000;
+      border-radius: 10px;
+    }
+  }
+
   &__actions {
     width: 100%;
     display: flex;
