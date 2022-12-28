@@ -13,9 +13,9 @@ import { Component } from '@angular/core';
 
       margin-right: 8px;
 
-      background-color: #ffffff;
+      background-color: rgba(0, 34, 255, 0.5);
 
-      cursor: pointer ;
+      cursor: pointer;
     }
   `]
 })
