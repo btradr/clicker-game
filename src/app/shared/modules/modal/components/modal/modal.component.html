@@ -1,0 +1,31 @@
+<div class="backdrop">
+	<div class="modal-wrap">
+		<h2 class="modal-wrap__title">
+			Clicker!
+		</h2>
+		<div class="modal-wrap__content">
+			<p class="modal-wrap__text">
+				Rules of the game:
+			</p>
+			<p class="modal-wrap__text">
+				Given 100 cells, one of which is highlighted at a certain time interval!
+				Hurry up to click before the time passes, otherwise the score will be credited to the computer
+			</p>
+			<p class="modal-wrap__text">
+				Your score in the last game: <b>{{ playerScore }}</b>
+			</p>
+			<p class="modal-wrap__text">
+				Computer score in last game: <b>{{ computerScore }}</b>
+			</p>
+		</div>
+		<div class="modal-wrap__actions">
+			<button
+				class="modal-wrap__btn modal-wrap__btn--black"
+				type="button"
+				(click)="onStart()"
+			>
+				Start game
+			</button>
+		</div>
+	</div>
+</div>
