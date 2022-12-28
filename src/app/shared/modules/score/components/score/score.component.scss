@@ -1,0 +1,19 @@
+.score {
+  width: 250px;
+  display: block;
+
+  margin: 0;
+  padding: 25px;
+
+  border: 1px solid #ffffff;
+  border-radius: 10px;
+
+
+  &__count {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 18px;
+    color: #ffffff;
+  }
+}
