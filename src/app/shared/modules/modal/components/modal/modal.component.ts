@@ -14,8 +14,8 @@ const STORAGE_COMPUTER_KEY: string = 'computerScore';
 export class ModalComponent implements OnInit {
   @Output() public onClose: EventEmitter<void> = new EventEmitter<void>();
 
-  public playerScore: number = 0;
-  public computerScore: number = 0;
+  public playerScore: number;
+  public computerScore: number;
 
   public constructor(
     private storageService: StorageService
