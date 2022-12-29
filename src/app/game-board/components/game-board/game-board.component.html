@@ -1,1 +1,17 @@
-<p>game-board works!</p>
+<div class="container">
+	<div class="board">
+		<ng-container *ngFor="let cell of cells">
+			<app-cell
+				[cellId]="cell"
+				[activeCell$]="activeCell$"
+				[time]="time"
+				(onEnd)="completeGame()"
+			></app-cell>
+		</ng-container>
+	</div>
+
+	<app-score
+		[scoreComputer]="computerCells.length"
+		[scorePlayer]="playerCells.length"
+	></app-score>
+</div>

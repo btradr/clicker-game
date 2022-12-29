@@ -1,0 +1,27 @@
+.container {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+  max-width: 1200px;
+
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+.board {
+  width: 880px;
+  height: 880px;
+
+  padding: 20px;
+
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  border: 1px solid #ffffff;
+  border-radius: 20px;
+}
