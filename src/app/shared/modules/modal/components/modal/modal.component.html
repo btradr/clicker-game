@@ -20,10 +20,14 @@
 			<div class="modal-wrap__timer">
 				<h3>Time:</h3>
 				<input
+					class="modal-wrap__control"
 					type="number"
 					placeholder="Enter milliseconds..."
-					[(ngModel)]="timer"
+					[(ngModel)]="time"
 				>
+				<small class="modal-wrap__hint">
+					Please enter a value in seconds. (The minimum value cannot exceed 0.1 second)
+				</small>
 			</div>
 		</div>
 		<div class="modal-wrap__actions">
