@@ -12,9 +12,8 @@ import {
 import { Subject, Subscription, takeUntil, timer } from 'rxjs';
 
 import { CellService } from '../../../../services/cell.service';
-
-
-const AMOUNT_TO_WIN: number = 10;
+import { checkQuantityHelper, secondsMultiplierHelper } from '../../../../helpers';
+import { AMOUNT_TO_WIN, GREEN_BACKGROUND, RED_BACKGROUND, YELLOW_BACKGROUND } from '../../../../constants';
 
 @Component({
   selector: 'app-cell',
@@ -78,7 +77,7 @@ export class CellComponent implements OnInit, OnDestroy {
       return;
     }
 
-    this.renderColor('#359b14')
+    this.renderColor(GREEN_BACKGROUND)
     this.cellService.activateCellPlayer(this.cellId);
   }
 
@@ -91,10 +90,8 @@ export class CellComponent implements OnInit, OnDestroy {
   }
 
   private checkForVictory(): void {
-    if (
-      this.computerCells.length === AMOUNT_TO_WIN ||
-      this.playerCells.length === AMOUNT_TO_WIN
-    ) {
+    if (checkQuantityHelper(this.computerCells, AMOUNT_TO_WIN) ||
+        checkQuantityHelper(this.playerCells, AMOUNT_TO_WIN)) {
       this.onEnd.emit();
     }
   }
@@ -102,11 +99,11 @@ export class CellComponent implements OnInit, OnDestroy {
   private countToComputer(): void {
     this.checkForVictory();
     this.cellService.activateCellComputer(this.cellId);
-    this.renderColor('#ab0404');
+    this.renderColor(RED_BACKGROUND);
   }
 
   private startTimer(): void {
-    timer(this.time * 1000)
+    timer(secondsMultiplierHelper(this.time))
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
         if (!this.activatedCell) {
@@ -123,7 +120,7 @@ export class CellComponent implements OnInit, OnDestroy {
           return;
         }
         this.startTimer()
-        this.renderColor('#d5ba00');
+        this.renderColor(YELLOW_BACKGROUND);
       })
   }
 

@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
-import { interval, Subject, Subscription, takeUntil } from 'rxjs';
+import { interval, Observable, Subject, takeUntil, takeWhile } from 'rxjs';
 
 import { CellService } from '../../../shared/services/cell.service';
 import { ModalComponent } from '../../../shared/modules/modal/components/modal/modal.component';
+import { randomHelper, secondsMultiplierHelper, timeCheckerHelper } from '../../../shared/helpers';
 
 @Component({
   selector: 'app-game-board',
@@ -16,6 +17,7 @@ export class GameBoardComponent implements OnInit, OnDestroy {
 	public time: number = 0;
 	public activeCell$: Subject<number> = new Subject<number>();
 
+	private stopInterval: boolean;
 	private destroy$: Subject<null> = new Subject<null>();
 
 	public constructor(
@@ -28,16 +30,15 @@ export class GameBoardComponent implements OnInit, OnDestroy {
 		this.showModal();
 	}
 
-	public ngOnDestroy() {
+	public ngOnDestroy(): void {
 		this.destroy$.next(null);
 		this.destroy$.complete();
 	}
 
 	public completeGame(): void {
-		this.cells = [];
-		this.playerCells = [];
-		this.computerCells = [];
+		this.stopInterval = false;
 
+		this.updateValues();
 		this.cellService.completeGame();
 		this.showModal();
 
@@ -51,21 +52,18 @@ export class GameBoardComponent implements OnInit, OnDestroy {
 		modal.instance.onClose
 			.pipe(takeUntil(this.destroy$))
 			.subscribe(() => {
-				if (modal.instance.time < 0.1) {
-					return;
+				if (timeCheckerHelper(modal.instance.time)) {
+					this.time = modal.instance.time;
+					this.start();
 				}
-				this.time = modal.instance.time;
-				this.initValues();
-				this.start();
-				this.viewContainerRef.clear();
 			});
 	}
 
-	private start(): Subscription {
-		return interval(this.time * 1000)
-			.pipe(takeUntil(this.destroy$))
+	private start(): void {
+		this.initValues();
+		this.startInterval()
 			.subscribe(() => {
-				const random = Math.floor(Math.random() * 101);
+				const random = randomHelper(101);
 				const candidate = this.cellService.checkIncomingNum(random);
 
 				if (candidate) {
@@ -74,9 +72,26 @@ export class GameBoardComponent implements OnInit, OnDestroy {
 
 				this.activeCell$.next(random);
 			});
+
+		this.viewContainerRef.clear();
+	}
+
+	private startInterval(): Observable<number> {
+		return interval(secondsMultiplierHelper(this.time))
+			.pipe(
+				takeWhile(() => this.stopInterval),
+				takeUntil(this.destroy$)
+			);
+	}
+
+	private updateValues(): void {
+		this.cells = [];
+		this.playerCells = [];
+		this.computerCells = [];
 	}
 
 	private initValues(): void {
+		this.stopInterval = true;
 		this.cells = this.cellService.cells;
 		this.playerCells = this.cellService.playerCells;
 		this.computerCells = this.cellService.computerCells;

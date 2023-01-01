@@ -1,10 +1,7 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 
 import { StorageService } from '../../../../services/storage.service';
-
-
-const STORAGE_PLAYER_KEY: string = 'playerScore';
-const STORAGE_COMPUTER_KEY: string = 'computerScore';
+import { STORAGE_COMPUTER_KEY, STORAGE_PLAYER_KEY } from '../../../../constants';
 
 @Component({
   selector: 'app-modal',

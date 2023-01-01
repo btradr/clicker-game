@@ -2,10 +2,7 @@ import { Injectable } from '@angular/core';
 import { of } from 'rxjs';
 
 import { StorageService } from './storage.service';
-
-
-const STORAGE_PLAYER_KEY: string = 'playerScore';
-const STORAGE_COMPUTER_KEY: string = 'computerScore';
+import { STORAGE_COMPUTER_KEY, STORAGE_PLAYER_KEY } from '../constants';
 
 @Injectable()
 export class CellService {

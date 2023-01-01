@@ -13,18 +13,14 @@ import { GameBoardComponent } from './components/game-board/game-board.component
 import { CellService } from '../shared/services/cell.service';
 
 @NgModule({
-  declarations: [
-    GameBoardComponent
-  ],
+  declarations: [GameBoardComponent],
   imports: [
     CommonModule,
     CellModule,
     ModalModule,
     ScoreModule
   ],
-  exports: [
-    GameBoardComponent
-  ],
+  exports: [GameBoardComponent],
   providers: [
     CellService,
     {
