@@ -3,7 +3,7 @@ export const randomHelper = (factor: number = 1): number => {
 };
 
 export const timeCheckerHelper = (time: number): boolean => {
-	return time > 0.1;
+	return time >= 0.1;
 };
 
 export const secondsMultiplierHelper = (time: number): number => {
